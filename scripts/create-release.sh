@@ -37,6 +37,16 @@ bump-my-version bump "$VERSION_BUMP_PART";
 
 git flow release finish -s "$NEW_VERSION";
 
+echo "Synchronizing develop and main...";
+
+git switch main;
+
+git merge develop;
+
+git switch develop;
+
+git merge main;
+
 echo "Pushing everything...";
 
 git push --atomic --follow-tags origin main develop
