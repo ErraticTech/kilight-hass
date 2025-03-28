@@ -1,7 +1,8 @@
 """Exceptions specific to the KiLight integration."""
 
-from custom_components.kilight.enum import TemperatureSensorLocation
 from kilight.protocol import OutputIdentifier
+
+from custom_components.kilight.enum import TemperatureSensorLocation
 
 
 class UnknownOutputError(ValueError):

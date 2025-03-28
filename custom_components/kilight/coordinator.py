@@ -1,7 +1,7 @@
 """The DataUpdateCoordinator subclass for the KiLight integration."""
 
-import logging
 from datetime import timedelta
+import logging
 from typing import TYPE_CHECKING
 
 from homeassistant.core import HomeAssistant

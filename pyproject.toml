@@ -59,6 +59,7 @@ ignore = [
     "D212", # multi-line-summary-first-line (incompatible with formatter)
     "COM812", # incompatible with formatter
     "ISC001", # incompatible with formatter
+    "ANN401" # any-type (incompatible with Home Assistant Core methods)
 ]
 fixable = ["ALL"]
 unfixable = []
@@ -74,6 +75,12 @@ known-first-party = [
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = [
     "S101",
-    "ARG001",
-    "ANN401"
+    "ARG001"
+]
+
+[tool.codespell]
+quiet-level = 2
+ignore-words-list = [
+    "hass",
+    "hacs"
 ]

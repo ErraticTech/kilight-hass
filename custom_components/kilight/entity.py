@@ -2,15 +2,14 @@
 
 from __future__ import annotations
 
-import logging
 from abc import ABCMeta, abstractmethod
+import logging
 from typing import Any
 
 from homeassistant.core import callback
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-
 from kilight.client import Device, OutputIdentifier, OutputState
 
 from .const import DOMAIN
@@ -20,16 +19,12 @@ from .exceptions import UnknownOutputError
 _LOGGER = logging.getLogger(__name__)
 
 
-class KiLightBaseEntity(
-    CoordinatorEntity[KiLightCoordinator], Entity, metaclass=ABCMeta
-):
+class KiLightBaseEntity(CoordinatorEntity[KiLightCoordinator], Entity, metaclass=ABCMeta):
     """Base class for deriving KiLight entities from."""
 
     _attr_has_entity_name: bool = True
 
-    def __init__(
-        self, coordinator: KiLightCoordinator, device: Device, name: str
-    ) -> None:
+    def __init__(self, coordinator: KiLightCoordinator, device: Device, name: str) -> None:
         """
         Initialize the KiLight entity.
 
@@ -75,9 +70,7 @@ class KiLightBaseEntity(
 
         Override this in subclasses to bind to more specific update callbacks.
         """
-        self.async_on_remove(
-            self.device.register_callback(self._handle_coordinator_update)
-        )
+        self.async_on_remove(self.device.register_callback(self._handle_coordinator_update))
 
     async def async_added_to_hass(self) -> None:
         """Register callbacks."""
@@ -105,9 +98,7 @@ class KiLightOutputBaseEntity(KiLightBaseEntity, metaclass=ABCMeta):
         """
         super().__init__(coordinator, device, name)
         self._output: OutputIdentifier = output
-        self._attr_unique_id = (
-            f"{self._attr_unique_id}_{OutputIdentifier.Name(self._output)}"
-        )
+        self._attr_unique_id = f"{self._attr_unique_id}_{OutputIdentifier.Name(self._output)}"
 
     @property
     def output(self) -> OutputIdentifier:

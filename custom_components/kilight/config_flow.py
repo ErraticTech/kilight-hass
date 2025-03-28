@@ -5,12 +5,11 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING, Any
 
-import voluptuous as vol
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
 from homeassistant.const import CONF_ADDRESS, CONF_HOST, CONF_PORT
-
 from kilight.client import DEFAULT_PORT, Device
 from kilight.client.exceptions import NetworkTimeoutError
+import voluptuous as vol
 
 from .const import DOMAIN
 
@@ -35,9 +34,7 @@ class KiLightConfigFlow(ConfigFlow, domain=DOMAIN):
         """Return the list of discovered Zeroconf devices."""
         return self._discovered_devices
 
-    async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    async def async_step_user(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         """Handle the user step to pick discovered device."""
         errors: dict[str, str] = {}
 
@@ -66,9 +63,7 @@ class KiLightConfigFlow(ConfigFlow, domain=DOMAIN):
                     title=name,
                     data={
                         CONF_HOST: discovery_info.host,
-                        CONF_PORT: discovery_info.port
-                        if discovery_info
-                        else DEFAULT_PORT,
+                        CONF_PORT: discovery_info.port if discovery_info else DEFAULT_PORT,
                     },
                 )
 
@@ -85,8 +80,7 @@ class KiLightConfigFlow(ConfigFlow, domain=DOMAIN):
                 vol.Required(CONF_ADDRESS): vol.In(
                     {
                         service_info.properties["hwid"]: (
-                            f"{service_info.hostname} "
-                            f"({service_info.host}:{service_info.port})"
+                            f"{service_info.hostname} ({service_info.host}:{service_info.port})"
                         )
                         for service_info in self.discovered_devices.values()
                     }
@@ -95,13 +89,9 @@ class KiLightConfigFlow(ConfigFlow, domain=DOMAIN):
         )
         # Disable due to false-positive error for ConfigFlowResult type
         # noinspection PyTypeChecker
-        return self.async_show_form(
-            step_id="user", data_schema=data_schema, errors=errors
-        )
+        return self.async_show_form(step_id="user", data_schema=data_schema, errors=errors)
 
-    async def async_step_zeroconf(
-        self, discovery_info: ZeroconfServiceInfo
-    ) -> ConfigFlowResult:
+    async def async_step_zeroconf(self, discovery_info: ZeroconfServiceInfo) -> ConfigFlowResult:
         """Handle device found via zeroconf."""
         if discovery_info.ip_address.version == 6:  # noqa: PLR2004 IPv6 version is not an ambiguous magic number
             # Disable due to false-positive error for ConfigFlowResult type
@@ -112,9 +102,7 @@ class KiLightConfigFlow(ConfigFlow, domain=DOMAIN):
         port = discovery_info.port if discovery_info.port else DEFAULT_PORT
         hardware_id = discovery_info.properties["hwid"]
 
-        _LOGGER.debug(
-            "Found KiLight device via zeroconf: %s:%s (%s)", host, port, hardware_id
-        )
+        _LOGGER.debug("Found KiLight device via zeroconf: %s:%s (%s)", host, port, hardware_id)
 
         device = Device(host, port)
 

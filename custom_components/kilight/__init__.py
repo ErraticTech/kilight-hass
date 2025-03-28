@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING
 
 from homeassistant.const import CONF_HOST, CONF_PORT, EVENT_HOMEASSISTANT_STOP, Platform
 from homeassistant.exceptions import ConfigEntryNotReady
-
 from kilight.client import DEFAULT_PORT, Device
 
 from .const import DEVICE_TIMEOUT_SECONDS, DOMAIN
@@ -67,9 +66,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: KiLightConfigEntry) -> b
         """Close the connection cleanly."""
         await device.disconnect()
 
-    entry.async_on_unload(
-        hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, _async_stop)
-    )
+    entry.async_on_unload(hass.bus.async_listen_once(EVENT_HOMEASSISTANT_STOP, _async_stop))
     return True
 
 
@@ -87,9 +84,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: KiLightConfigEntry) -> 
     return unload_ok
 
 
-async def _async_update_listener(
-    hass: HomeAssistant, entry: KiLightConfigEntry
-) -> None:
+async def _async_update_listener(hass: HomeAssistant, entry: KiLightConfigEntry) -> None:
     data: KiLightDeviceData = hass.data[DOMAIN][entry.entry_id]
     if entry.title != data.title:
         await hass.config_entries.async_reload(entry.entry_id)

@@ -14,7 +14,6 @@ from homeassistant.components.light import (
     LightEntityFeature,
 )
 from homeassistant.core import HomeAssistant, callback
-
 from kilight.client import (
     MAX_COLOR_TEMP,
     MIN_COLOR_TEMP,

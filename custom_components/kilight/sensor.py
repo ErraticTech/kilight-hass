@@ -17,7 +17,6 @@ from homeassistant.const import (
     UnitOfTemperature,
 )
 from homeassistant.core import HomeAssistant, callback
-
 from kilight.client import Device, OutputIdentifier, OutputIdUtil
 
 from .const import DOMAIN
@@ -152,9 +151,7 @@ class KiLightTemperatureEntity(KiLightBaseEntity, SensorEntity):
         """
         super().__init__(coordinator, device, name)
         self._temperature_sensor = temperature_sensor
-        self._attr_unique_id = (
-            f"{self._attr_unique_id}_{temperature_sensor.name}_temperature"
-        )
+        self._attr_unique_id = f"{self._attr_unique_id}_{temperature_sensor.name}_temperature"
         self._attr_name = f"{self.temperature_sensor_display_name} Temperature"
         self._attr_translation_placeholders = {
             "sensor_location_name": self.temperature_sensor_display_name
@@ -186,9 +183,7 @@ class KiLightTemperatureEntity(KiLightBaseEntity, SensorEntity):
                 self._attr_native_value = self.device.state.driver_temperature.celsius
         elif self._temperature_sensor == TemperatureSensorLocation.PowerSupply:
             if self.device.state.power_supply_temperature is not None:
-                self._attr_native_value = (
-                    self.device.state.power_supply_temperature.celsius
-                )
+                self._attr_native_value = self.device.state.power_supply_temperature.celsius
         elif self._temperature_sensor == TemperatureSensorLocation.OutputA:
             if self.device.state.output_a.temperature is not None:
                 self._attr_native_value = self.device.state.output_a.temperature.celsius
@@ -213,9 +208,7 @@ class KiLightFanSpeedEntity(KiLightBaseEntity, SensorEntity):
     _attr_suggested_display_precision = 0
     _attr_icon = "mdi:fan"
 
-    def __init__(
-        self, coordinator: KiLightCoordinator, device: Device, name: str
-    ) -> None:
+    def __init__(self, coordinator: KiLightCoordinator, device: Device, name: str) -> None:
         """
         Initialize the Fan Speed entity.
 
@@ -245,9 +238,7 @@ class KiLightFanDrivePercentageEntity(KiLightBaseEntity, SensorEntity):
     _attr_suggested_display_precision = 1
     _attr_icon = "mdi:fan"
 
-    def __init__(
-        self, coordinator: KiLightCoordinator, device: Device, name: str
-    ) -> None:
+    def __init__(self, coordinator: KiLightCoordinator, device: Device, name: str) -> None:
         """
         Initialize the Fan Drive Percentage Entity.
 
