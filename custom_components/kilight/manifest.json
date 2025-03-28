@@ -1,0 +1,14 @@
+{
+  "domain": "kilight",
+  "name": "KiLight Open Hardware Light Controller",
+  "codeowners": ["@ErraticTech", "@PMLavigne"],
+  "version": "0.1.0",
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/ErraticTech/kilight-hass",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/ErraticTech/kilight-hass/issues",
+  "requirements": ["kilight-client==0.4.0"],
+  "zeroconf": ["_kilight._tcp.local."]
+}
