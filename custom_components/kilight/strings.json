@@ -1,0 +1,41 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Pick KiLight Device to Set Up",
+        "data": {
+          "address": "Discovered Devices"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "[%key:common::config_flow::error::cannot_connect%]",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
+    }
+  },
+  "entity": {
+    "light": {
+      "output_light": {
+        "name": "Output {output_id} Light"
+      }
+    },
+    "sensor": {
+      "component_temperature": {
+        "name": "{sensor_location_name} Temperature"
+      },
+      "current": {
+        "name": "Output {output_id} Current"
+      },
+      "fan_drive_percentage": {
+        "name": "Fan Drive Level"
+      },
+      "fan_speed": {
+        "name": "Fan Speed"
+      }
+    }
+  }
+}

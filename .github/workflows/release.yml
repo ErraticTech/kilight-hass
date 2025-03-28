@@ -1,0 +1,30 @@
+name: Run final checks and register the GitHub release
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  run-lint:
+    uses: ./.github/workflows/lint.yml
+    secrets: inherit
+  run-validate:
+    uses: ./.github/workflows/validate.yml
+  register-release:
+    name: Register the GitHub Release
+    runs-on: ubuntu-latest
+    needs:
+      - run-lint
+      - run-validate
+    permissions:
+      contents: write  # IMPORTANT: mandatory for making GitHub Releases
+    steps:
+    - name: Create GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: >-
+        gh release create
+        "$GITHUB_REF_NAME"
+        --repo "$GITHUB_REPOSITORY"
+        --notes ""
