@@ -1,6 +1,7 @@
 name: "Validate"
 
 on:
+  workflow_call:
   schedule:
     - cron: "21 0 * * *"
   push:
