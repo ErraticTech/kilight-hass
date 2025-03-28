@@ -1,3 +1,21 @@
+[project]
+name = "kilight-hass"
+version = "0.1.0"
+license = "GPL-3.0-or-later"
+authors = [
+    {name = "Patrick Lavigne", email = "me@patrick.codes"},
+]
+description = "Home Assistant integration for connecting to KiLight devices."
+requires-python = ">= 3.12"
+classifiers = [
+    "Topic :: Home Automation",
+    "Development Status :: 2 - Pre-Alpha"
+]
+readme = "README.md"
+
+[project.urls]
+repository = "https://github.com/ErraticTech/kilight-hass"
+
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
@@ -84,3 +102,24 @@ ignore-words-list = [
     "hass",
     "hacs"
 ]
+
+[tool.bumpversion]
+commit = true
+tag = false
+sign_tags = false
+tag_name = "v{new_version}"
+
+[[tool.bumpversion.files]]
+filename = "README.md"
+search = "# kilight-hass v{current_version}"
+replace = "# kilight-hass v{new_version}"
+
+[[tool.bumpversion.files]]
+filename = "custom_components/kilight/manifest.json"
+search = '"version": "{current_version}",'
+replace = '"version": "{new_version}",'
+
+[[tool.bumpversion.files]]
+filename = "src/kilight/client/__init__.py"
+search = "__version__ = \"{current_version}\""
+replace = "__version__ = \"{new_version}\""
