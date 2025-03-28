@@ -2,7 +2,7 @@
   "domain": "kilight",
   "name": "KiLight Open Hardware Light Controller",
   "codeowners": ["@ErraticTech", "@PMLavigne"],
-  "version": "0.1.1",
+  "version": "0.1.2",
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/ErraticTech/kilight-hass",
