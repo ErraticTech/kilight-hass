@@ -65,7 +65,7 @@ jobs:
         run: python3 -m pip install -r requirements.txt
 
       - name: Run SonarScan
-        uses: SonarSource/sonarqube-scan-action@v4
+        uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
