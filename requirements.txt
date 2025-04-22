@@ -5,7 +5,7 @@ kilight-client==0.4.0
 voluptuous==0.15.2
 pytest~=8.3.5
 pytest-asyncio~=0.26.0
-pytest-cov~=6.0.0
+pytest-cov~=6.1.1
 pytest-homeassistant-custom-component~=0.13.235
 bump-my-version==1.1.1
 pre-commit==4.2.0
