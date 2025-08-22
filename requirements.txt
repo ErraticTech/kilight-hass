@@ -1,7 +1,7 @@
 homeassistant>=2025.4.3
 pip>=25.1
 ruff==0.12.9
-kilight-client==0.4.1
+kilight-client==0.4.2
 voluptuous==0.15.2
 pytest~=8.4.1
 pytest-asyncio~=1.1.0
