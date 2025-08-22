@@ -9,6 +9,6 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/ErraticTech/kilight-hass/issues",
   "requirements": ["kilight-client==0.4.2"],
-  "version": "0.1.10",
+  "version": "0.1.11",
   "zeroconf": ["_kilight._tcp.local."]
 }
